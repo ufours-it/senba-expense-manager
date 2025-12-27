@@ -1,33 +1,55 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { Ionicons } from "@expo/vector-icons";
+import { Tabs, useRouter } from "expo-router";
+//local imports
+import { useTheme } from "@/context/themeContext";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+  const { theme } = useTheme();
+  const router = useRouter();
+  
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
+        tabBarStyle: {
+          backgroundColor: theme.colors.surface,
+          borderTopColor: theme.colors.border,
+          borderTopWidth: 1,
+          paddingBottom: 8,
+          paddingTop: 8,
+        },
+        tabBarActiveTintColor: theme.colors.primary,
+        tabBarInactiveTintColor: theme.colors.textMuted,
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: "500",
+          marginTop: 4,
+        },
+      }}
+    >
       <Tabs.Screen
-        name="index"
+        name="dashboard"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "Dashboard",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="stats-chart" size={size} color={color} />
+          ),
         }}
       />
+
       <Tabs.Screen
-        name="explore"
+        name="entry"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: "Add Expense",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="add-circle" size={size} color={color} />
+          ),
+        }}
+        listeners={{
+          tabPress: (e) => {
+            e.preventDefault();
+            router.replace("/(tabs)/entry");
+          },
         }}
       />
     </Tabs>

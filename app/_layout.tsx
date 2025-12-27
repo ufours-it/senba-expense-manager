@@ -1,24 +1,29 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import { getToastConfig } from '@/config/toastConfig';
+import { ExpenseProvider } from "@/context/expenseContext";
+import { useTheme } from "@/context/themeContext";
+import { Stack } from "expo-router";
+import { PaperProvider, Portal } from "react-native-paper";
+import Toast from 'react-native-toast-message';
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
+//local imports
+import { ThemeProvider } from "@/context/themeContext";
 
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+function ToastWrapper() {
+  const { theme } = useTheme();
+  return <Toast config={getToastConfig(theme)} />;
+}
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <PaperProvider>
+      <Portal.Host>
+        <ThemeProvider>
+        <ExpenseProvider>
+          <Stack screenOptions={{ headerShown: false }} />
+          <ToastWrapper />
+        </ExpenseProvider>
+        </ThemeProvider>
+      </Portal.Host>
+    </PaperProvider>
   );
 }

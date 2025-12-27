@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "pocket-ledger",
+    "name": "Expense Tracker",
     "slug": "pocket-ledger",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/logo.jpg",
     "scheme": "pocketledger",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -19,7 +19,8 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.senba.pocketledger"
     },
     "web": {
       "output": "static",
@@ -30,19 +31,26 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
+          "image": "./assets/images/logo.jpg",
+          "imageWidth": 400,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",
           "dark": {
             "backgroundColor": "#000000"
           }
         }
-      ]
+      ],
+      "@react-native-community/datetimepicker"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "15ee718e-910b-4a35-8cc7-250f5b4e9790"
+      }
     }
   }
 }
