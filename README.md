@@ -1,50 +1,54 @@
-# Welcome to your Expo app 👋
+﻿# Pocket Ledger
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A small Expo + React Native personal expense tracker demo.
 
-## Get started
+**Project Overview**
+
+This repository demonstrates a minimal expense-tracking app built with Expo and TypeScript. It uses a straightforward, file-based routing structure and React Context for state management so you can focus on UI and features rather than infrastructure.
+
+**Folder Structure**
+
+- App/: App entry and route-driven screens. Follows Expo Router conventions for file-based routing and contains top-level layouts and screen components.
+- Assets/: Static assets such as images and icons used by the app.
+- components/: Reusable UI components (e.g., theme toggle, chart components) to keep screens small and focused.
+- config/: App-wide configuration (e.g., toast configuration) and shared settings.
+- constants/: Static constants like categories.ts, icon maps, and theme.ts used across the app.
+- context/: React Context providers (for example expenseContext.tsx and themeContext.tsx) used for lightweight state management.
+- models/: Type definitions and domain models (for example expense.ts).
+- storage/: Persistence layer (for example expenseStorage.ts) that abstracts Async storage details so it can be swapped later (SecureStore, or a DB).
+- utils/: Small helper functions, such as FormatDate.ts and listHelper.ts.
+- Validation/: Schemas and validation logic (e.g., expenseSchema.ts) to validate user input.
+- Root files: package.json, app.json, tsconfig.json, and ESLint/config files for tooling and build configuration.
+
+**Why these choices (Libraries & Tools)**
+
+- Expo: Fast cross-platform development, easy device testing, and a managed workflow that removes native build complexity.
+- TypeScript: Improves developer experience and reduces runtime bugs through static types.
+- File-based routing (Expo Router): Keeps navigation simple and maps filesystem layout to app routes.
+- React Context: Lightweight, built-in state management ideal for an app of this scope (centralized contexts for expenses and theme).
+- Separation of concerns: components/, context/, storage/, and utils/ keep code modular and testable.
+- Validation and models: Using a Validation/ folder and typed models/ helps ensure data integrity and easier refactors.
+
+These choices prioritize quick iteration, clarity, and portability for a demo app while keeping the codebase approachable for contributors.
+
+**Getting Started**
 
 1. Install dependencies
 
-   ```bash
-   npm install
-   ```
+`bash
+npm install
+`
 
-2. Start the app
+2. Start the Expo dev server
 
-   ```bash
-   npx expo start
-   ```
+`bash
+npx expo start
+`
 
-In the output, you'll find options to open the app in a
+3. Open on a device or emulator using the QR code or the listed options (Expo Go, simulator, or development build).
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+**Development notes**
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- To modify app routes, edit files under app/ following the file-based routing rules.
+- Persistent storage is abstracted in storage/expenseStorage.ts; swap implementations without changing UI code.
+- Charts live in components/charts/ they are isolated to keep visual logic separated from screen logic.
